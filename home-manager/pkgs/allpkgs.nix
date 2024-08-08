@@ -12,7 +12,7 @@ home.packages = with pkgs; [
     discord
     distrobox
     # text editors
-    inputs.nixvim.packages.${system}.default
+    #inputs.MikNixVim.packages.${system}.default
     obsidian
     vscode-fhs   
     vim

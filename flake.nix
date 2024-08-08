@@ -7,10 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    #flake utils for nix vim needs a system
-    #systems.url = "github:nix-systems/x86_64-linux";
-    #flake-utils.url = "github:numtide/flake-utils";
-    #flake-utils.inputs.systems.follows = "systems";
+    #nixvim.url = "github:mikaelfangel/nixvim-config";
   };
 
   outputs = {
@@ -43,7 +40,8 @@
         # > Our main home-manager configuration file <
         modules = [
           ./home-manager/home.nix
-          ./home-manager/nixvim/flake.nix
+          #./home-manager/MikNixVim/flake.nix 
+          
           ];
       };
     };
