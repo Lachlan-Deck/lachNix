@@ -24,6 +24,6 @@ home.packages = with pkgs; [
     docker
     networkmanager
     #contains |nmtui-hostname |NetworkManager |nmtui-edit |nmtui-connect |nmtui |nmcli |nm-online
-];
+    ];
 
 }
