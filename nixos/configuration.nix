@@ -58,35 +58,8 @@
   networking.hostName = "Tess";
 
   networking.networkmanager = {
-  enable = true;
-  ensureProfiles.profiles = {
+    enable = true;
 
-    RMIT = {
-      connection = {
-        id = "RMIT-University";
-        permissions = "";
-        type = "wifi";
-      };
-      ipv4 = {
-        dns-search = "";
-        method = "auto";
-      };
-      ipv6 = {
-        addr-gen-mode = "stable-privacy";
-        dns-search = "";
-        method = "auto";
-      };
-      wifi = {
-        mac-address-blacklist = "";
-        mode = "infrastructure";
-        ssid = "RMIT-University";
-      };
-      wifi-security = {
-        auth-alg = "PEAP";
-        key-mgmt = "WPA & WPA2 ENTERPRISE";
-      };
-    };
-  };
   };
   
   hardware.bluetooth.enable = true;
