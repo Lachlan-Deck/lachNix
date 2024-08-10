@@ -2,5 +2,6 @@
 {
   stylix.enable = true;
   
-  stylix.image = ./condock.png;
+  stylix.image = ./Constitution-Dock.jpg;
+
 }
