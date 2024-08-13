@@ -3,7 +3,6 @@
 {  
 home.packages = with pkgs; [
     firefox
-    steam 
     _1password-gui
     thunderbird
     gparted
@@ -13,11 +12,9 @@ home.packages = with pkgs; [
     distrobox
     go-autoconfig
     # text editors
-    #inputs.MikNixVim.packages.${system}.default
     obsidian
     vscode-fhs   
     vim
-    eclipses.eclipse-java
     # tools
     fzf
     jdk
@@ -25,7 +22,6 @@ home.packages = with pkgs; [
     docker
     networkmanager
     alacritty
-    #contains |nmtui-hostname |NetworkManager |nmtui-edit |nmtui-connect |nmtui |nmcli |nm-online
   ];
 
 }
