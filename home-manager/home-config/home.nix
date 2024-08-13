@@ -5,6 +5,7 @@
 {
   imports = [
   ../programs/git.nix
+  ../programs/nixvim.nix
   ../pkgs/allpkgs.nix
   ];
 
