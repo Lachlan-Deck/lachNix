@@ -4,8 +4,8 @@
 
 {
   imports = [
-  ./programs/git.nix
-  ./pkgs/allpkgs.nix
+  ../programs/git.nix
+  ../pkgs/allpkgs.nix
   ];
 
   programs.home-manager = {

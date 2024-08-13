@@ -9,9 +9,9 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./NvidiaDrivers.nix
     ./miscEnable.nix
-    ./themes/styles.nix
+    ../themes/styles.nix
+    ./xremap.nix
   ];
   
   nixpkgs = {
@@ -37,8 +37,6 @@
 
   users.users = {
     lach = {
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
       initialPassword = "lach";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
@@ -48,17 +46,14 @@
   };
 
   virtualisation.docker.enable = true;
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "Tess";
-
   networking.networkmanager = {
     enable = true;
 
   };
-  
+  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   system.stateVersion = "23.05";
 }

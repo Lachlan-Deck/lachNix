@@ -17,31 +17,28 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  services.xserver.enable = true;
+  services = {
+    printing.enable = true;
+    
+    xserver = {
+      enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+      };      
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    #jack.enable = true;
-    #media-session.enable = true;
-  };
 
 
 }

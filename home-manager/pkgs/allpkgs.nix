@@ -11,6 +11,7 @@ home.packages = with pkgs; [
     slack
     discord
     distrobox
+    go-autoconfig
     # text editors
     #inputs.MikNixVim.packages.${system}.default
     obsidian
@@ -23,7 +24,8 @@ home.packages = with pkgs; [
     parted
     docker
     networkmanager
+    alacritty
     #contains |nmtui-hostname |NetworkManager |nmtui-edit |nmtui-connect |nmtui |nmcli |nm-online
-    ];
+  ];
 
 }
