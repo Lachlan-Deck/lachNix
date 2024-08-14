@@ -22,6 +22,9 @@ home.packages = with pkgs; [
     docker
     networkmanager
     alacritty
+    zellij
+    yazi
+    boxbuddy
   ];
 
 }

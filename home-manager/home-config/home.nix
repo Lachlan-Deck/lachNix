@@ -5,6 +5,7 @@
 {
   imports = [
   ../programs/git.nix
+  ../programs/lf.nix
   ../pkgs/allpkgs.nix
   ];
 
