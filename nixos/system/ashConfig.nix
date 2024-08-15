@@ -11,6 +11,8 @@
     ./miscEnable.nix
     ../themes/styles.nix
     ./NvidiaDrivers.nix
+#    ./hyperland.nix
+    ./xgnome.nix
   ];
   
   nixpkgs = {

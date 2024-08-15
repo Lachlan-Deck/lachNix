@@ -20,20 +20,12 @@
   services = {
     printing.enable = true;
     
-    xserver = {
+    pipewire = {
       enable = true;
-
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
-      xkb.layout = "us";
-      xkb.variant = "";
-      };      
-      pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-      };
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
   # Enable sound with pipewire.

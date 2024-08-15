@@ -2,6 +2,8 @@
 
 {  
 home.packages = with pkgs; [
+    floorp
+    chromium
     firefox
     _1password-gui
     thunderbird
