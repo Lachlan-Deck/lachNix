@@ -1,5 +1,4 @@
-#mist's configuration.nix
-
+#ash config
 {
   inputs,
   lib,
@@ -11,7 +10,6 @@
     ./hardware-configuration.nix
     ./miscEnable.nix
     ../themes/styles.nix
-#    ./xremap.nix
     ./NvidiaDrivers.nix
   ];
   
