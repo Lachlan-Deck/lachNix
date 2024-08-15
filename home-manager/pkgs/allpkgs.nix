@@ -11,11 +11,13 @@ home.packages = with pkgs; [
     discord
     distrobox
     go-autoconfig
+    zoom-us
     # text editors
     obsidian
     vscode-fhs   
     vim
     # tools
+    via
     fzf
     jdk
     parted

@@ -11,7 +11,8 @@
     ./hardware-configuration.nix
     ./miscEnable.nix
     ../themes/styles.nix
-    ./xremap.nix
+#    ./xremap.nix
+    ./NvidiaDrivers.nix
   ];
   
   nixpkgs = {
@@ -44,11 +45,11 @@
       extraGroups = ["wheel" "networkmanager" "docker"];
     };
   };
-
+  programs.git.enable = true;
   virtualisation.docker.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "Tess";
+  networking.hostName = "Ashford";
   networking.networkmanager = {
     enable = true;
 
@@ -57,4 +58,5 @@
   hardware.bluetooth.enable = true;
   system.stateVersion = "23.05";
 }
+
 
