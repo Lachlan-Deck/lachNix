@@ -39,6 +39,14 @@
           ./hosts/ash/ash-home.nix
         ];
       };
+
+      "lach@tess" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;}; 
+        modules = [
+          ./hosts/tess/tess-home.nix
+        ];
+      };
     };
 
   };

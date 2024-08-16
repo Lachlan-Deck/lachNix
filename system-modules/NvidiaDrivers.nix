@@ -1,4 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{ config,  ... }:
 
 {
   services.xserver.videoDrivers = ["nvidia"];
