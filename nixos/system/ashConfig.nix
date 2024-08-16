@@ -11,7 +11,7 @@
     ./miscEnable.nix
     ../themes/styles.nix
     ./NvidiaDrivers.nix
-#    ./hyperland.nix
+    ./hyprland.nix
     ./xgnome.nix
   ];
   
@@ -54,7 +54,6 @@
     enable = true;
 
   };
-  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   system.stateVersion = "23.05";
 }
