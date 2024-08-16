@@ -1,15 +1,13 @@
-#tess config
+#ash config
+{ inputs, lib, config, ... }:
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
-    ./hardware-configuration.nix
-    ./miscEnable.nix
-    ../themes/styles.nix
+    ./hardware-configuration.nix 
+    ../../system-modules/themes/styles.nix
+    ../../system-modules/miscEnable.nix
+    ../../system-modules/NvidiaDrivers.nix
+    ../../system-modules/hyprland.nix 
+    ../../system-modules/xgnome.nix
   ];
   
   nixpkgs = {
@@ -32,7 +30,6 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-
   users.users = {
     lach = {
       initialPassword = "lach";
@@ -46,12 +43,11 @@
   virtualisation.docker.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "Tess";
+  networking.hostName = "Ashford";
   networking.networkmanager = {
     enable = true;
 
   };
-  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   system.stateVersion = "23.05";
 }

@@ -1,18 +1,12 @@
-#ash config
+#tess config
+{ inputs, lib, config, ... }: 
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     ./hardware-configuration.nix
-    ./miscEnable.nix
-    ../themes/styles.nix
-    ./NvidiaDrivers.nix
-    ./hyprland.nix
-    ./xgnome.nix
+    ../../system-modules/themes/styles.nix
+    ../../system-modules/xremap.nix
+    ../../system-modules/miscEnable.nix
+    ../../system-modules/gnome.nix
   ];
   
   nixpkgs = {
@@ -49,11 +43,12 @@
   virtualisation.docker.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  networking.hostName = "Ashford";
+  networking.hostName = "Tess";
   networking.networkmanager = {
     enable = true;
 
   };
+  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   system.stateVersion = "23.05";
 }
