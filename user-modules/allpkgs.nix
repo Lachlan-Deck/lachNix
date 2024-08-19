@@ -20,7 +20,6 @@ home.packages = with pkgs; [
     # text editors
     obsidian
     vim
-    vscode-fhs
 
     # tools
     fzf
@@ -28,7 +27,8 @@ home.packages = with pkgs; [
     networkmanager
     alacritty
     zellij
-      
+    wezterm
+
     #container stuff
     docker
     boxbuddy

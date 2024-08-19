@@ -18,7 +18,6 @@
       pkgs.libnotify
       pkgs.swww
       pkgs.wofi
-      pkgs.kitty     
     ];
   };
   xdg.portal.enable = true;
