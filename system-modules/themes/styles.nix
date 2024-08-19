@@ -5,7 +5,7 @@ in {
   stylix = {
     homeManagerIntegration.followSystem = true;
     enable = true;
-    cursor.package = pkgs.bibata-cursos;
+    cursor.package = pkgs.bibata-cursors;
     cursor.name = "Bibata-Modern-Ice";
     image = ./Constitution-Dock.jpg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/mellow-purple.yaml";
