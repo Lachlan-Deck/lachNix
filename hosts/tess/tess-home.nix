@@ -5,7 +5,7 @@
 {
   imports = [
   ../../user-modules/allpkgs.nix
-  ../../user-modules/lf.nix
+  ../../user-modules/lf/lf.nix
   ../../user-modules/git.nix
   ];
 

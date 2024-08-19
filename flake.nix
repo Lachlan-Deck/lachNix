@@ -14,7 +14,7 @@
       
     nixosConfigurations = {
 
-      tess = nixpkgs.lib.nixosSystem {
+      Tess = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
             ./hosts/tess/configuration.nix
@@ -22,7 +22,7 @@
         ];
       };
       
-      ash = nixpkgs.lib.nixosSystem {
+      Ashford = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
             ./hosts/ash/configuration.nix
@@ -32,7 +32,7 @@
     };
 
     homeConfigurations = {
-      "lach@ash" = home-manager.lib.homeManagerConfiguration {
+      "lach@Ashford" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;}; 
         modules = [
@@ -40,7 +40,7 @@
         ];
       };
 
-      "lach@tess" = home-manager.lib.homeManagerConfiguration {
+      "lach@Tess" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;}; 
         modules = [

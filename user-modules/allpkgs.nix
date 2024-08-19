@@ -2,33 +2,37 @@
 
 {  
 home.packages = with pkgs; [
-    floorp
+    
+    # browsers
     chromium
     firefox
+    
+
     _1password-gui
     thunderbird
-    gparted
+    go-autoconfig # auto configs imap for outlook in thunderbird, cant add email without it
     teams-for-linux
     slack
     discord
-    distrobox
-    go-autoconfig
     zoom-us
+    vial    
+
     # text editors
     obsidian
-    vscode-fhs   
     vim
+
+
     # tools
-    via
     fzf
-    jdk
-    parted
-    docker
+    gparted
     networkmanager
     alacritty
     zellij
-    yazi
+      
+    #container stuff
+    docker
     boxbuddy
+    distrobox
   ];
 
 }

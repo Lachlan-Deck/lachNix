@@ -3,7 +3,7 @@
 {
   imports = [
     ../../user-modules/git.nix
-    ../../user-modules/lf.nix
+    ../../user-modules/lf/lf.nix
     ../../user-modules/allpkgs.nix
   ];
 

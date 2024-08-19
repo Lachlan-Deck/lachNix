@@ -1,8 +1,8 @@
 {
   imports = [
     ./bufferline.nix
-    ./cmp.nix
-    ./copilot-chat.nix
+    #./cmp.nix
+    #./copilot-chat.nix
     ./git.nix
     ./lightline.nix
     ./lsp/default.nix
@@ -12,6 +12,7 @@
     ./lsp/trouble.nix
     ./nvim-tree.nix
     ./options.nix
+    ./utils/render-markdown.nix
     ./treesitter.nix
     ./utils/auto-pairs.nix
     ./utils/autosave.nix
@@ -184,7 +185,7 @@
       key = "<leader>d";
       action = "+diagnostics/debug";
     }
-    {
+    { 
       key = "<leader>dt";
       action = "<CMD>TroubleToggle<CR>";
       options.desc = "Toggle trouble";
