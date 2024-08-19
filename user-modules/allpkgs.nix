@@ -20,7 +20,7 @@ home.packages = with pkgs; [
     # text editors
     obsidian
     vim
-
+    vscode-fhs
 
     # tools
     fzf
