@@ -2,14 +2,18 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     stylix.url = "github:danth/stylix";
+
     xremap-flake.url = "github:xremap/nix-flake"; 
+
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, ... } @inputs:
   
   let inherit (self) outputs; in {
       
