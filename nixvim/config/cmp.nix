@@ -2,23 +2,6 @@
 {
   plugins = {
     luasnip.enable = true;
-    copilot-lua = {
-      enable = true;
-      suggestion.enabled = false;
-      panel.enabled = false;
-      filetypes = {
-        yaml = false;
-        markdown = false;
-        help = false;
-        gleam = false; # Copilot doesn't really help when writing Gleam
-        gitcommit = false;
-        gitrebase = false;
-        hgcommit = false;
-        svn = false;
-        cvs = false;
-        "." = false;
-      };
-    };
 
     cmp-buffer = { enable = true; };
 
@@ -49,7 +32,6 @@
           }
           { name = "nvim_lua"; }
           { name = "path"; }
-          { name = "copilot"; }
         ];
 
         formatting = {
