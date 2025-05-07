@@ -10,13 +10,22 @@
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+ 
+    zshrc.source = ".user-modules/zsh/zshrc";
 
-
-  };
-
-  outputs = { self, nixpkgs, unstable-nixpkgs, home-manager, ... } @ inputs:
+  };  
+  outputs = {
+    self,
+    nixpkgs,
+    unstable-nixpkgs,
+    home-manager,
+    zshrc,
+    ...
+    } @ inputs:
   
-  let inherit (self) outputs; in {
+  let
+    inherit (self) outputs;
+  in {
       
     nixosConfigurations = {
 
@@ -57,15 +66,14 @@
       "lachlandeck@Dixie" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {
-          inherit inputs outputs;
+          inherit inputs outputs zshrc;
           unstable-pkgs = unstable-nixpkgs.legacyPackages.aarch64-darwin;
         }; 
         modules = [
           ./hosts/dixie/dixie-home.nix
         ];
       };
-
-   };
+    };
 
   };
 }

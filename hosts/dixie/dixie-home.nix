@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{ inputs,  lib, config, pkgs, ... }: 
+{ inputs,  lib, config, pkgs, zshrc, ... }: 
 
 {
   imports = [
@@ -28,7 +28,7 @@
   };
 
   home.file.".config/home-manager/zshrc" = {
-    source = ../../user-modules/zsh/zshrc;
+    source = zshrc;
   };
   
   nixpkgs = {
