@@ -1,10 +1,14 @@
-{ inputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./dev.nix
     # ./gui.nix
-    # ./hyprland.nix 
+    # ./hyprland.nix
   ];
 
   options.allpkgs = {
@@ -26,7 +30,7 @@
         slack
         discord
         zoom-us
-        vial    
+        vial
 
         # text editors
         obsidian
@@ -40,4 +44,3 @@
     })
   ];
 }
-
