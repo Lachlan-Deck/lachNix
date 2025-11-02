@@ -13,7 +13,6 @@
 
   options.allpkgs = {
     enableAllPkgs = lib.mkEnableOption "get all the old allpgs stuff";
-    enableDev = lib.mkEnableOption "get the new stuff";
   };
 
   config = lib.mkMerge [

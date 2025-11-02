@@ -11,6 +11,11 @@
     ./helix
     ./yazi
   ];
+
+  # make option available in flake to makeif true
+  options.allpkgs = {
+    enableDev = lib.mkEnableOption "get the new stuff";
+  };
   config = lib.mkIf config.allpkgs.enableDev {
     home.packages = [
       pkgs.fzf
