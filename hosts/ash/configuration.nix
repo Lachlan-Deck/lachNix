@@ -7,7 +7,8 @@
     ../../system-modules/miscEnable.nix
     ../../system-modules/NvidiaDrivers.nix
     ../../system-modules/hyprland.nix 
-    ../../system-modules/xgnome.nix
+    ../../system-modules/hyprlock.nix
+    #    ../../system-modules/xgnome.nix
   ];
   
   nixpkgs = {

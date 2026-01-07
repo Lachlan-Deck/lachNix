@@ -3,6 +3,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    stylix.url = "github:danth/stylix";
+
+    xremap-flake.url = "github:xremap/nix-flake"; 
     darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     stylix.url = "github:danth/stylix";
@@ -13,6 +16,7 @@
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    hyprland.url = "github:hyprwm/Hyprland";
     darwin.url = "github:nix-darwin/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
 

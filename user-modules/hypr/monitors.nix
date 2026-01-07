@@ -15,15 +15,15 @@ in {
         };
         width = mkOption {
           type = types.int;
-          example = 1920;
+          example = 2560;
         };
         height = mkOption {
           type = types.int;
-          example = 1080;
+          example = 1440;
         };
         refreshRate = mkOption {
           type = types.float;
-          default = 60;
+          default = 180;
         };
         x = mkOption {
           type = types.int;
