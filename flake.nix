@@ -1,7 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     stylix.url = "github:danth/stylix";
     xremap-flake.url = "github:xremap/nix-flake";
@@ -10,9 +12,15 @@
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    darwin.url = "github:nix-darwin/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
+
+    yazelix.url = "github:Lachlan-Deck/yazelix-lach";
   };
   outputs = {
     self,
+    darwin,
     nixpkgs,
     unstable-nixpkgs,
     home-manager,
@@ -93,6 +101,22 @@
           unstable-pkgs = unstablePkgsFor.aarch64-darwin;
         };
         modules = [./hosts/dixie/dixie-home.nix];
+      };
+    };
+
+    # build darwin flake using:
+    # $ darwin-rebuild build --flake
+    # sudo darwin-rebuild switch
+    darwinConfigurations = {
+      Dixie = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = {
+          inherit inputs;
+          unstable-pkgs = unstablePkgsFor.aarch64-darwin;
+        };
+        modules = [
+          ./hosts/dixie/configuration.nix
+        ];
       };
     };
   };

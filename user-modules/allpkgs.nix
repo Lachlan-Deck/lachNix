@@ -1,15 +1,18 @@
-{ inputs, lib, config, pkgs, ... }:
-
 {
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./dev.nix
     # ./gui.nix
-    # ./hyprland.nix 
+    # ./hyprland.nix
   ];
 
   options.allpkgs = {
     enableAllPkgs = lib.mkEnableOption "get all the old allpgs stuff";
-    enableDev = lib.mkEnableOption "get the new stuff";
   };
 
   config = lib.mkMerge [
@@ -26,7 +29,7 @@
         slack
         discord
         zoom-us
-        vial    
+        vial
 
         # text editors
         obsidian
@@ -40,4 +43,3 @@
     })
   ];
 }
-
