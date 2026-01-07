@@ -1,26 +1,23 @@
 {
   inputs = {
+    #nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    stylix.url = "github:danth/stylix";
-
-    xremap-flake.url = "github:xremap/nix-flake"; 
     darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    stylix.url = "github:danth/stylix";
+    #linux system stuff
     xremap-flake.url = "github:xremap/nix-flake";
-
     hyprland.url = "github:hyprwm/Hyprland";
+    stylix.url = "github:danth/stylix";
 
+    #user space stuff
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    yazelix.url = "github:Lachlan-Deck/yazelix-lach";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    #mac stuff
     darwin.url = "github:nix-darwin/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "darwin-nixpkgs";
-
-    yazelix.url = "github:Lachlan-Deck/yazelix-lach";
   };
   outputs = {
     self,
