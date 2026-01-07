@@ -105,9 +105,7 @@
       };
     };
 
-    # build darwin flake using:
-    # $ darwin-rebuild build --flake
-    # sudo darwin-rebuild switch
+    # sudo darwin-rebuild switch --flake ./#Dixie
     darwinConfigurations = {
       Dixie = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
