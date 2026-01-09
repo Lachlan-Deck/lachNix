@@ -12,17 +12,17 @@
   #
   # -- nvm turns out its built into determinate nix
   # and you cant enable it unless darwin is managing your nix install
-  ## nix.linux-builder.enable = true;
+  nix.linux-builder.enable = true;
 
   # Required: allow nix-darwin to manage the system
   system.stateVersion = 6;
 
   # to prevent colflict with determinate nix installation
-  nix.enable = false;
+  nix.enable = true;
 
   networking.hostName = "Dixie";
 
-  #primary user (important for permissions later)
+  #primary user (important for permissions)
   users.users.lachlandeck = {
     home = "/Users/lachlandeck";
     shell = pkgs.zsh;

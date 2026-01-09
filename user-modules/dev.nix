@@ -6,21 +6,23 @@
   unstable-pkgs,
   ...
 }: {
+  options.allpkgs.enableDev =
+    lib.mkEnableOption "enable development environment";
+
+  # Always import submodules
   imports = [
     ./zsh
     ./helix
     ./yazi
   ];
 
-  # make option available in flake to makeif true
-  options.allpkgs = {
-    enableDev = lib.mkEnableOption "get the new stuff";
-  };
+  # Gate only the dev packages
   config = lib.mkIf config.allpkgs.enableDev {
     home.packages = [
       pkgs.fzf
       pkgs.terraform
       pkgs.openpomodoro-cli
+      pkgs.lazygit
       unstable-pkgs.ansible_2_17
       unstable-pkgs.zellij
       unstable-pkgs.typescript-language-server

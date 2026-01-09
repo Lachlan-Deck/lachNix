@@ -10,6 +10,7 @@
   imports = [
     ../../user-modules/allpkgs.nix
     ../../user-modules/myYazelix
+    ../../user-modules/dev.nix
   ];
 
   allpkgs = {
@@ -21,7 +22,7 @@
   #Set your username
   home = {
     username = "lachlandeck";
-    homeDirectory = "/Users/lachlandeck/";
+    homeDirectory = "/Users/lachlandeck";
   };
 
   home.stateVersion = "23.05";
