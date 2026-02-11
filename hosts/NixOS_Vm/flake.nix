@@ -1,43 +1,52 @@
 {
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    copyparty.url = "github:9001/copyparty";
   };
 
   outputs = {
     self,
     nixpkgs,
+    copyparty,
+    ...
   }: {
-    nixosModules.base = {pkgs, ...}: {
-      system.stateVersion = "22.05";
+    packages.aarch64-darwin = {
+      NixOS_Copyparty_Vm =
+        self.nixosConfigurations.NixOS_Copyparty_Vm.config.system.build.vm;
 
-      # Configure networking
-      networking.useDHCP = false;
-      networking.interfaces.eth0.useDHCP = true;
-
-      # Create user "test"
-      services.getty.autologinUser = "test";
-      users.users.test.isNormalUser = true;
-
-      # Enable passwordless ‘sudo’ for the "test" user
-      users.users.test.extraGroups = ["wheel"];
-      security.sudo.wheelNeedsPassword = false;
-    };
-    nixosModules.vm = {...}: {
-      # Make VM output to the terminal instead of a separate window
-      virtualisation.vmVariant.virtualisation.graphics = false;
+      NixOS_Vm =
+        self.nixosConfigurations.NixOS_Vm.config.system.build.vm;
     };
 
-    # use below with a linux builder form mac configured
-    # nix run .#darwinVM
-    nixosConfigurations.darwinVM = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules = [
-        self.nixosModules.base
-        self.nixosModules.vm
-        {
-          virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        }
-      ];
+    nixosConfigurations = {
+      # use below with a linux builder for mac configured
+      # nix run .#NixOS_Copyparty_Vm
+      NixOS_Copyparty_Vm = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {
+          inherit copyparty;
+        };
+        modules = [
+          copyparty.nixosModules.default
+          ./NixOS_Vm_base
+          ./copyparty
+          {
+            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          }
+        ];
+      };
+
+      # use below with a linux builder for mac configured
+      # nix run .#NixOS_Vm
+      NixOS_Vm = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./NixOS_Vm_base
+          {
+            virtualisation.vmVariant.virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          }
+        ];
+      };
     };
-    packages.aarch64-darwin.darwinVM = self.nixosConfigurations.darwinVM.config.system.build.vm;
   };
 }
