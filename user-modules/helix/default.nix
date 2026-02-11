@@ -14,6 +14,14 @@
       };
     };
 
+    home.packages = [
+      pkgs.alejandra
+      pkgs.nodePackages.prettier
+      unstable-pkgs.vscode-langservers-extracted
+      pkgs.nixd
+      unstable-pkgs.superhtml
+    ];
+
     languages = {
       language-server = {
         # HTML
@@ -114,12 +122,4 @@
       ];
     };
   };
-
-  home.packages = [
-    pkgs.alejandra
-    pkgs.nodePackages.prettier
-    unstable-pkgs.vscode-langservers-extracted
-    pkgs.nixd
-    unstable-pkgs.superhtml
-  ];
 }

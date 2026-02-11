@@ -4,6 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    wrappers.url = "github:lassulus/wrappers";
 
     #linux system stuff
     xremap-flake.url = "github:xremap/nix-flake";
@@ -25,6 +26,7 @@
     nixpkgs,
     unstable-nixpkgs,
     home-manager,
+    wrappers,
     ...
   } @ inputs: let
     supportedSystems = ["x86_64-linux" "aarch64-darwin"];
