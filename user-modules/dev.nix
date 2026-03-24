@@ -23,6 +23,7 @@
       pkgs.terraform
       pkgs.openpomodoro-cli
       pkgs.lazygit
+      pkgs.uv
       unstable-pkgs.ansible_2_17
       unstable-pkgs.zellij
       unstable-pkgs.typescript-language-server
