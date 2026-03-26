@@ -31,6 +31,12 @@
 
       # Helix runtime
       export HELIX_RUNTIME="$(dirname "$(which hx)")/../share/helix/runtime"
+
+      # spell check script
+      spl() {
+        ${pkgs.curl}/bin/curl -s "https://api.datamuse.com/sug?s=$1" \
+          | ${pkgs.jq}/bin/jq -r '.[0:3][] .word'
+      }
     '';
   };
 }
