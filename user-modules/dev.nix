@@ -28,8 +28,8 @@
       pkgs.uv
       unstable-pkgs.ansible_2_17
       unstable-pkgs.zellij
-      unstable-pkgs.typescript-language-server
-      unstable-pkgs.mongodb-compass
+      # unstable-pkgs.typescript-language-server
+      # unstable-pkgs.mongodb-compass
     ];
   };
 }
