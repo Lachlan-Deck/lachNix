@@ -16,7 +16,7 @@
 
     #user space stuff
     home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "unstable-nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     #mac stuff
     darwin.url = "github:nix-darwin/nix-darwin/master";
