@@ -12,7 +12,7 @@
 
   allpkgs = {
     enableAllPkgs = false;
-    enableDev = true;
+    enableDev = false;
     enableHeadlessDev = true;
   };
 
