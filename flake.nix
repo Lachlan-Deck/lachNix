@@ -121,5 +121,19 @@
         ];
       };
     };
+    homeConfigurations = {
+      "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = unstablePkgsFor.aarch64-linux;
+
+        extraSpecialArgs = {
+          inherit inputs;
+          unstable-pkgs = unstablePkgsFor.aarch64-linux;
+        };
+
+        modules = [
+          ./hosts/lachsPI/home.nix
+        ];
+      };
+    };
   };
 }
