@@ -121,6 +121,7 @@
         ];
       };
     };
+    # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
     homeConfigurations = {
       "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = unstablePkgsFor.aarch64-linux;
