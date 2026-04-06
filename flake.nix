@@ -28,7 +28,7 @@
     wrappers,
     ...
   } @ inputs: let
-    supportedSystems = ["x86_64-linux" "aarch64-darwin"];
+    supportedSystems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
 
     # Custom pkgs importer with defaults
     mkPkgs = system:
