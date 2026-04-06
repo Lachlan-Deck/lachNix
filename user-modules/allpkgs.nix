@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./dev.nix
+    ./headless-dev.nix
     # ./gui.nix
     # ./hyprland.nix
   ];

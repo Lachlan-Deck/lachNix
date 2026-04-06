@@ -13,6 +13,7 @@
   allpkgs = {
     enableAllPkgs = false;
     enableDev = true;
+    enableHeadlessDev = true;
   };
 
   home = {
