@@ -89,6 +89,7 @@
         };
         modules = [./hosts/ash/ash-home.nix];
       };
+
       #home-manager switch --flake ~/lachNix#lachlandeck@Dixie --impure
       "lachlandeck@Dixie" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
@@ -104,6 +105,22 @@
         };
         modules = [./hosts/dixie/dixie-home.nix];
       };
+
+      # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
+      homeConfigurations = {
+        "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = unstablePkgsFor.aarch64-linux;
+
+          extraSpecialArgs = {
+            inherit inputs;
+            unstable-pkgs = unstablePkgsFor.aarch64-linux;
+          };
+
+          modules = [
+            ./hosts/lachsPI/lachsPI-home.nix
+          ];
+        };
+      };
     };
 
     # sudo darwin-rebuild switch --flake ./#Dixie
@@ -118,21 +135,6 @@
         };
         modules = [
           ./hosts/dixie/configuration.nix
-        ];
-      };
-    };
-    # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
-    homeConfigurations = {
-      "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = unstablePkgsFor.aarch64-linux;
-
-        extraSpecialArgs = {
-          inherit inputs;
-          unstable-pkgs = unstablePkgsFor.aarch64-linux;
-        };
-
-        modules = [
-          ./hosts/lachsPI/lachsPI-home.nix
         ];
       };
     };

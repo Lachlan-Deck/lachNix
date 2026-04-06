@@ -16,7 +16,6 @@
     enableAllPkgs = false; # Default: don't install general packages
     enableDev = true; # Default: do install dev packages
   };
-  myYazelix.enable = true;
 
   #Set your username
   home = {
