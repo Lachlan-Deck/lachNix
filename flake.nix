@@ -15,7 +15,7 @@
     stylix.url = "github:danth/stylix";
 
     #user space stuff
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "unstable-nixpkgs";
 
     #mac stuff
