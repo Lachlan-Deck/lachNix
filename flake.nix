@@ -109,6 +109,7 @@
 
     # sudo darwin-rebuild switch --flake ./#Dixie
     # home-manager switch --flake ~/lachNix#lachlandeck@Dixie --impure
+    # bootstrap: nix run github:nix-community/home-manager -- switch --flake ~/lachNix/#lachlandeck@Dixie
     darwinConfigurations = {
       Dixie = darwin.lib.darwinSystem {
         system = "aarch64-darwin";

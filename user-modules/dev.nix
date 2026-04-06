@@ -21,6 +21,8 @@
     home.packages = [
       pkgs.fzf
       pkgs.terraform
+      pkgs.docker
+      pkgs.colima
       pkgs.openpomodoro-cli
       pkgs.lazygit
       pkgs.uv
