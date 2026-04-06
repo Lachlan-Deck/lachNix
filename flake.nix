@@ -2,8 +2,11 @@
   inputs = {
     #nix packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+
     unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     wrappers.url = "github:lassulus/wrappers";
 
     #linux system stuff
@@ -12,8 +15,8 @@
     stylix.url = "github:danth/stylix";
 
     #user space stuff
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "unstable-nixpkgs";
 
     #mac stuff
     darwin.url = "github:nix-darwin/nix-darwin/master";
@@ -60,8 +63,6 @@
       })
       supportedSystems);
   in {
-    zshrc = import ./user-modules/zsh/zshrc;
-
     nixosConfigurations = {
       Tess = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
@@ -89,7 +90,6 @@
         };
         modules = [./hosts/ash/ash-home.nix];
       };
-
       #home-manager switch --flake ~/lachNix#lachlandeck@Dixie --impure
       "lachlandeck@Dixie" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
@@ -107,19 +107,17 @@
       };
 
       # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
-      homeConfigurations = {
-        "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = unstablePkgsFor.aarch64-linux;
+      "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = unstablePkgsFor.aarch64-linux;
 
-          extraSpecialArgs = {
-            inherit inputs;
-            unstable-pkgs = unstablePkgsFor.aarch64-linux;
-          };
-
-          modules = [
-            ./hosts/lachsPI/lachsPI-home.nix
-          ];
+        extraSpecialArgs = {
+          inherit inputs;
+          unstable-pkgs = unstablePkgsFor.aarch64-linux;
         };
+
+        modules = [
+          ./hosts/lachsPI/lachsPI-home.nix
+        ];
       };
     };
 
