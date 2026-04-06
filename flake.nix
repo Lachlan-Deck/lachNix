@@ -132,7 +132,7 @@
         };
 
         modules = [
-          ./hosts/lachsPI/home.nix
+          ./hosts/lachsPI/lachsPI-home.nix
         ];
       };
     };
