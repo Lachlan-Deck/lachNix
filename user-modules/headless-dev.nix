@@ -17,7 +17,7 @@
   ];
 
   # Gate only the dev packages
-  config = lib.mkIf config.allpkgs.headlessDev {
+  config = lib.mkIf config.allpkgs.enableHeadlessDev {
     home.packages = [
       pkgs.fzf
       # pkgs.terraform
