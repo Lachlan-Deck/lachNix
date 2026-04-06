@@ -14,7 +14,6 @@
     #user space stuff
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    yazelix.url = "github:Lachlan-Deck/yazelix-lach";
 
     #mac stuff
     darwin.url = "github:nix-darwin/nix-darwin/master";
@@ -108,6 +107,8 @@
     };
 
     # sudo darwin-rebuild switch --flake ./#Dixie
+    # home-manager switch --flake ~/lachNix#lachlandeck@Dixie --impure
+    # bootstrap: nix run github:nix-community/home-manager -- switch --flake ~/lachNix/#lachlandeck@Dixie
     darwinConfigurations = {
       Dixie = darwin.lib.darwinSystem {
         system = "aarch64-darwin";

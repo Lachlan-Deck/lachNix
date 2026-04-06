@@ -3,6 +3,14 @@
   unstable-pkgs,
   ...
 }: {
+  home.packages = [
+    pkgs.alejandra
+    pkgs.nodePackages.prettier
+    unstable-pkgs.vscode-langservers-extracted
+    pkgs.nixd
+    unstable-pkgs.superhtml
+  ];
+
   programs.helix = {
     enable = true;
 
@@ -13,14 +21,6 @@
         lsp.display-messages = true;
       };
     };
-
-    home.packages = [
-      pkgs.alejandra
-      pkgs.nodePackages.prettier
-      unstable-pkgs.vscode-langservers-extracted
-      pkgs.nixd
-      unstable-pkgs.superhtml
-    ];
 
     languages = {
       language-server = {
@@ -74,7 +74,7 @@
           file-types = ["css"];
           language-servers = ["vscode-css-language-server"];
           formatter = {
-            command = "/Users/lachlandeck/.nix-profile/bin/prettier";
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
             args = ["--stdin-filepath" "%file%"];
           };
           auto-format = true;
