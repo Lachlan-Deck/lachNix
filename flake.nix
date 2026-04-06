@@ -108,7 +108,7 @@
 
       # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
       "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = mkUnstablePkgs "aarch64-linux";
+        pkgs = pkgsFor.aarch64-linux;
 
         extraSpecialArgs = {
           inherit inputs;
