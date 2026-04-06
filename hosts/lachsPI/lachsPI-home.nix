@@ -7,7 +7,6 @@
 }: {
   imports = [
     ../../user-modules/allpkgs.nix
-    ../../user-modules/myYazelix
     ../../user-modules/dev.nix
   ];
 
