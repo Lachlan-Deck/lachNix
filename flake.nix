@@ -83,7 +83,7 @@
 
     homeConfigurations = {
       "lach@Ashford" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsFor.x86_64-linux;
+        pkgs = unstablePkgsFor.x86_64-linux;
         extraSpecialArgs = {
           inherit inputs;
           unstable-pkgs = unstablePkgsFor.x86_64-linux;
@@ -108,11 +108,11 @@
 
       # nix run github:nix-community/home-manager -- switch --flake .#lach@lachsPI
       "lach@lachsPI" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = unstablePkgsFor.aarch64-linux;
+        pkgs = mkUnstablePkgs "aarch64-linux";
 
         extraSpecialArgs = {
           inherit inputs;
-          unstable-pkgs = unstablePkgsFor.aarch64-linux;
+          unstable-pkgs = mkUnstablePkgs "aarch64-linux";
         };
 
         modules = [
