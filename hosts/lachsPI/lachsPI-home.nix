@@ -8,6 +8,7 @@
   imports = [
     ../../user-modules/allpkgs.nix
     ../../user-modules/dev.nix
+    ../../user-modules/headless-dev.nix
   ];
 
   allpkgs = {
