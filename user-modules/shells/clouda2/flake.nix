@@ -12,7 +12,12 @@
     nixpkgs,
   }: let
     system = "aarch64-darwin"; # or aarch64-darwin, x86_64-darwin, etc
-    pkgs = import nixpkgs {inherit system;};
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    };
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
