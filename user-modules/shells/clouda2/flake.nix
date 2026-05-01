@@ -1,5 +1,5 @@
 {
-  description = "Standalone Python dev shell";
+  description = "Standalone shell for cloud assignment 2";
 
   # nix develop ~/lachNix/user-modules/shells/python3
 
@@ -16,7 +16,9 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
+        pkgs.terraform
         pkgs.python313
+        pkgs.python313Packages.boto3
       ];
 
       shellHook = ''
