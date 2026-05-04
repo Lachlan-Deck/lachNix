@@ -25,6 +25,7 @@
         pkgs.ansible
         pkgs.python313
         pkgs.python313Packages.boto3
+        pkgs.python312Packages.python-dotenv
       ];
 
       shellHook = ''
