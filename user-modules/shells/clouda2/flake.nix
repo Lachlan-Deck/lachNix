@@ -23,9 +23,12 @@
       packages = [
         pkgs.terraform
         pkgs.ansible
-        pkgs.python313
-        pkgs.python313Packages.boto3
-        pkgs.python313Packages.python-dotenv
+
+        (pkgs.python313.withPackages (ps:
+          with ps; [
+            boto3
+            python-dotenv
+          ]))
       ];
 
       shellHook = ''
