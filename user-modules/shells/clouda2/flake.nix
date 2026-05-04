@@ -22,6 +22,7 @@
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         pkgs.terraform
+        pkgs.ansible
         pkgs.python313
         pkgs.python313Packages.boto3
       ];
