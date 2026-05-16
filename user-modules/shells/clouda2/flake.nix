@@ -22,6 +22,7 @@
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         pkgs.terraform
+        pkgs.certbot
         pkgs.ansible
 
         (pkgs.python313.withPackages (ps:
@@ -34,6 +35,7 @@
       shellHook = ''
         echo "🐍 Python dev shell ready"
         python --version
+        python -c "import boto3, dotenv; print('ok')"
       '';
     };
   };
