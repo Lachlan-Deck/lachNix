@@ -9,6 +9,10 @@
     unstable-pkgs.vscode-langservers-extracted
     pkgs.nixd
     unstable-pkgs.superhtml
+    # python stuff
+    pkgs.python312Packages.python-lsp-server
+    pkgs.python312Packages.ruff
+    pkgs.pyright
   ];
 
   programs.helix = {
@@ -24,7 +28,7 @@
 
     languages = {
       language-server = {
-        # HTML
+        # HTMLpython312Packages.python-lsp-server
         superhtml-lsp = {
           command = "${unstable-pkgs.superhtml}/bin/superhtml";
           args = ["lsp"];
@@ -42,7 +46,7 @@
           args = ["--stdio"];
         };
 
-        # ESLint (optional, usually for JS/TS)
+        # ESLint (usually for JS/TS)
         vscode-eslint-language-server = {
           command = "${unstable-pkgs.vscode-langservers-extracted}/bin/vscode-eslint-language-server";
           args = ["--stdio"];
@@ -50,6 +54,14 @@
         nixd = {
           command = "${pkgs.nixd}/bin/nixd";
           args = [];
+        };
+        python = {
+          command = "${pkgs.python312Packages.python-lsp-server}/bin/pylsp";
+          args = [];
+        };
+        pyright = {
+          command = "${pkgs.pyright}/bin/pyright-langserver";
+          args = ["--stdio"];
         };
       };
 
@@ -87,7 +99,7 @@
           file-types = ["json"];
           language-servers = ["vscode-json-language-server"];
           formatter = {
-            command = "/Users/lachlandeck/.nix-profile/bin/prettier";
+            command = "${pkgs.nodePackages.prettier}/bin/prettier";
             args = ["--stdin-filepath" "%file%" "--parser" "json"];
           };
           auto-format = true;
@@ -116,6 +128,17 @@
           formatter = {
             command = "${pkgs.alejandra}/bin/alejandra";
             args = ["-"];
+          };
+          auto-format = true;
+        }
+        {
+          name = "python";
+          scope = "source.python";
+          file-types = ["py"];
+          language-servers = ["python" "pyright"];
+          formatter = {
+            command = "${pkgs.python312Packages.ruff}/bin/ruff";
+            args = ["format" "-"];
           };
           auto-format = true;
         }
