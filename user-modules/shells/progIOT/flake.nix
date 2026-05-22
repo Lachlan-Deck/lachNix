@@ -22,6 +22,8 @@
 
         pkgs.pkg-config
         pkgs.gcc
+        pkgs.curl
+        pkgs.jq
       ];
       shellHook = ''
         echo "🐍 Flask + MQTT dev shell"
@@ -120,6 +122,40 @@
             echo "  http://localhost:5001"
             echo ""
             echo "Press Ctrl+C to stop..."
+
+            wait
+          '';
+      };
+      test = pkgs.mkShell {
+        inputsFrom = [baseShell];
+
+        shellHook =
+          baseShell.shellHook
+          + ''
+            echo ""
+            echo "🧪 Starting test environment..."
+
+            # start broker
+            if ! pgrep mosquitto > /dev/null; then
+              mosquitto -d
+            fi
+
+            # start services
+            echo "Starting master..."
+            (cd master && DEVICE_ID=master PORT=5000 python app.py) &
+
+            echo "Starting room..."
+            (cd room && ROOM_ID=room1 PORT=5001 python app.py) &
+
+            echo "Starting agent..."
+            (cd agent && PORT=5002 python app.py) &
+
+            # run tests
+            sleep 3
+            ./scripts/test-system.sh
+
+            echo ""
+            echo "Press Ctrl+C to stop everything"
 
             wait
           '';
