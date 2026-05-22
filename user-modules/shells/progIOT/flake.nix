@@ -9,7 +9,7 @@
     self,
     nixpkgs,
   }: let
-    system = builtins.currentSystem;
+    system = "aarch64-darwin";
     pkgs = import nixpkgs {inherit system;};
 
     baseShell = pkgs.mkShell {
