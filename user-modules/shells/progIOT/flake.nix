@@ -56,6 +56,12 @@
         echo ""
         echo "Tip: use different DEVICE_IDs to simulate devices"
         echo "───────────────────────────"
+        echo ""
+        echo "──────── Dev Shells ────────"
+        echo "nix develop           # default shell"
+        echo "nix develop .#mqtt    # start MQTT broker"
+        echo "nix develop .#full    # run full simulation"
+        echo "────────────────────────────"
       '';
     };
   in {
