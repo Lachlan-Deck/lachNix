@@ -19,17 +19,12 @@
   # Gate only the dev packages
   config = lib.mkIf config.allpkgs.enableDev {
     home.packages = [
+      pkgs.dtask
       pkgs.fzf
-      pkgs.terraform
       pkgs.docker
       pkgs.colima
-      pkgs.openpomodoro-cli
       pkgs.lazygit
-      pkgs.uv
-      unstable-pkgs.ansible_2_17
       unstable-pkgs.zellij
-      # unstable-pkgs.typescript-language-server
-      # unstable-pkgs.mongodb-compass
     ];
   };
 }
