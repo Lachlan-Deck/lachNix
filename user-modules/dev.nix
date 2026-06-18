@@ -23,7 +23,6 @@
       pkgs.docker
       pkgs.colima
       pkgs.lazygit
-      unstable-pkgs.zellij
     ];
   };
 }

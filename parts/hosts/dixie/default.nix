@@ -41,6 +41,7 @@
     modules = [
       self.homeModules.dixie
       self.homeModules.helix
+      self.homeModules.zellij
     ];
   };
 }
