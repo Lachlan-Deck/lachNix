@@ -19,10 +19,16 @@
         font-family = "JetBrainsMono Nerd Font";
         font-size = 12;
         command = "${pkgs.zsh}/bin/zsh";
+        # dont ask
+        # confirm-close-surface = "false";
 
         # Window styling options
         # window-decoration = false;
         # background-opacity = 0.95;
+
+        # fix for zellij on mac this is a ghostty config option it wont break
+        # if not on mac
+        macos-option-as-alt = "left";
       };
       themes = {
         my-gruvbox-dark = {
