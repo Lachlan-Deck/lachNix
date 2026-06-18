@@ -1,3 +1,4 @@
+# user-modules/dev.nix
 {
   inputs,
   lib,
@@ -12,7 +13,6 @@
   # Always import submodules
   imports = [
     ./zsh
-    ./helix
     ./yazi
   ];
 

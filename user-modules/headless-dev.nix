@@ -12,7 +12,6 @@
   # Always import submodules
   imports = [
     ./zsh
-    ./helix
     ./yazi
   ];
 

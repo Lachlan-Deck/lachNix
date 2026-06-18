@@ -1,5 +1,4 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+#host-config/dixie/dixie-home.nix
 {
   inputs,
   lib,
@@ -13,7 +12,7 @@
   ];
 
   allpkgs = {
-    enableAllPkgs = false; # Default: don't install general packages
+    enableAllPkgs = false;
     enableDev = true; # Default: do install dev packages
   };
 
@@ -22,7 +21,6 @@
     username = "lachlandeck";
     homeDirectory = "/Users/lachlandeck";
   };
-
   home.stateVersion = "23.05";
   programs.home-manager = {
     enable = true;
