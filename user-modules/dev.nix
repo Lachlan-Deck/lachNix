@@ -19,7 +19,6 @@
   # Gate only the dev packages
   config = lib.mkIf config.allpkgs.enableDev {
     home.packages = [
-      pkgs.dtask
       pkgs.fzf
       pkgs.docker
       pkgs.colima
