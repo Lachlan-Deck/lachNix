@@ -28,6 +28,7 @@
 
   home.sessionVariables = {
     EDITOR = "hx";
+    XDG_CONFIG_HOME = "$HOME/.config";
   };
 
   nixpkgs = {

@@ -40,7 +40,7 @@
         # "calibre"
         "discord"
         "firefox"
-        "ghostty"
+        # "ghostty"
         "github"
         "google-chrome"
         # "intellij-idea"
