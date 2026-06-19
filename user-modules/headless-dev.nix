@@ -12,7 +12,6 @@
   # Always import submodules
   imports = [
     ./zsh
-    ./yazi
   ];
 
   # Gate only the dev packages

@@ -43,6 +43,7 @@
       self.homeModules.helix
       self.homeModules.zellij
       self.homeModules.ghostty
+      self.homeModules.yazi
     ];
   };
 }
