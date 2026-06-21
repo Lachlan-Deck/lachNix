@@ -4,7 +4,7 @@
 # sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-rebuild -- switch --flake ~/lachNix#Dixie
 # AFTERWARD:
 # sudo darwin-rebuild switch --flake ~/lachNix#Dixie
-
+# nix profile history -p /nix/var/nix/profiles/system
 {
   self,
   inputs,
