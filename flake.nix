@@ -7,17 +7,8 @@
 
     # flake parts
     flake-parts.url = "github:hercules-ci/flake-parts";
-    wrappers.url = "github:lassulus/wrappers";
     import-tree.url = "github:vic/import-tree";
-
-    # linux system stuff
-    xremap-flake.url = "github:xremap/nix-flake";
-    hyprland.url = "github:hyprwm/Hyprland";
-    stylix.url = "github:danth/stylix";
-
-    # user space stuff
-    home-manager.url = "github:nix-community/home-manager/release-26.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     # mac stuff
     darwin.url = "github:nix-darwin/nix-darwin/master";
@@ -29,22 +20,16 @@
     darwin,
     nixpkgs,
     unstable-nixpkgs,
-    home-manager,
-    wrappers,
+    wrapper-modules,
     flake-parts,
     import-tree,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
       imports = [
-        ./parts/schema.nix
-        (inputs.import-tree ./parts)
+        ./modules/hosts/dixie/schema.nix
+        (inputs.import-tree ./modules)
       ];
-
       systems = ["x86_64-linux" "aarch64-darwin" "aarch64-linux"];
-
-      # We leave the `flake` attribute block completely empty of host configurations.
-      # Everything is dynamically added by the `parts/` directory files now.
-      flake = {};
     });
 }
