@@ -1,6 +1,6 @@
 # parts/hosts/dixie/configuration.nix
 {...}: {
-  flake.darwinModules.dixie_base = {
+  flake.darwinModules.dixie-base = {
     pkgs,
     self,
     ...
@@ -31,9 +31,5 @@
     nix.linux-builder.enable = true;
     nix.enable = true;
 
-    # -------- SOFTWARE TO INSTALL ---------------------------
-    environment.systemPackages = [
-      self.packages.${sys}.dixie-modules
-    ];
   };
 }

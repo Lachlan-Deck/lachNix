@@ -1,4 +1,10 @@
 # parts/hosts/dixie/default.nix
+# FRESH:
+# the "-- switch" is not a typo
+# sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-rebuild -- switch --flake ~/lachNix#Dixie
+# AFTERWARD:
+# sudo darwin-rebuild switch --flake ~/lachNix#Dixie
+
 {
   self,
   inputs,
@@ -8,7 +14,7 @@
     system = "aarch64-darwin";
     specialArgs = {inherit inputs self;};
     modules = [
-      self.darwinModules.dixie_base
+      self.darwinModules.dixie-base
       self.darwinModules.homebrew-wrapper
     ];
   };
