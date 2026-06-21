@@ -30,6 +30,5 @@
     # -------- LINUX VM ON MAC -------------------------------
     nix.linux-builder.enable = true;
     nix.enable = true;
-
   };
 }

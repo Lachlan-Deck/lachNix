@@ -42,6 +42,8 @@
           bind "Alt t" { MoveFocus "Right"; }
           bind "Alt a" { GoToPreviousTab; }
           bind "Alt g" { GoToNextTab; }
+
+          bind "Alt T" { NewTab; }
         }
       }
     '';
@@ -70,13 +72,15 @@
         ];
 
         config = {
+          # Use the active module configuration text string
           package = lib.mkDefault pkgs.zellij;
 
           constructFiles."zellij/config.kdl" = {
             relPath = "zellij/config.kdl";
-            content = zellijConfigText;
+            content = zellijConfigText; 
           };
           
+          # Force activation scripts to fire inside user-profile installations
           runShell = [
             {
               data = ''
@@ -86,7 +90,6 @@
               '';
             }
           ];
-
           prefixVar = [
             {
               name = "PATH-zellij";

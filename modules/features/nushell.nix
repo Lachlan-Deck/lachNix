@@ -52,7 +52,6 @@
             alias lg = lazygit
           '';
 
-          # Fixed: Replaced `typeof` with `describe` logic
           "env.nu".content = ''
             $env.ENV_CONVERSIONS = {
               "PATH": {
@@ -72,8 +71,9 @@
               []
             }
 
-            # Inject the external world locations manually into Nushell's restricted load scope
             let system_paths = [
+              ("~/.nix-profile/bin" | path expand) 
+              "/nix/var/nix/profiles/default/bin"
               "/opt/homebrew/bin"
               "/opt/homebrew/sbin"
               "/usr/local/bin"
@@ -82,7 +82,7 @@
               "/usr/sbin"
               "/sbin"
             ]
-
+            
             $env.PATH = ($current_paths | append $system_paths | uniq)
           '';
 
