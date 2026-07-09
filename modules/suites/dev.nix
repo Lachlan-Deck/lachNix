@@ -7,10 +7,10 @@
     ...
   }: let
     appsSuite = [
-      config.packages.ghostty
       config.packages.zellij
       config.packages.yazi
       config.packages.helix
+      config.packages.nushell
     ];
   in {
     config = {
@@ -40,11 +40,6 @@
       programs.zellij = {
         enable = true;
         defaultShellPackage = config.packages.nushell;
-      };
-
-      programs.ghostty = {
-        enable = true;
-        commandPackage = config.packages.zellij;
       };
 
       packages = {

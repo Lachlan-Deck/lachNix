@@ -5,10 +5,7 @@
     inputs,
     self,
     ...
-  }: let
-    sys = pkgs.stdenv.hostPlatform.system;
-    ghosttyPkg = self.packages.${sys}.ghostty;
-  in {
+  }: {
     # -------- NIXPKGS CONFIGURATION -------------------------
     nixpkgs.config = {
       allowUnfree = true;
@@ -29,25 +26,32 @@
     security.pam.services.sudo_local.touchIdAuth = true;
     environment.variables.EDITOR = "hx";
 
-    # -------- NIX-DARWIN APPS LINKING -----------------------
-    environment.systemPackages = [ghosttyPkg];
-
     # -------- HOME MANAGER INTEGRATION ----------------------
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.extraSpecialArgs = {inherit inputs self;};
+    home-manager.backupFileExtension = "backup";
+    home-manager.extraSpecialArgs = {
+      inherit inputs self;
+      wrappedPackages = {
+        zellij = self.packages.${pkgs.stdenv.hostPlatform.system}.zellij;
+      };
+    };
 
-    home-manager.users.lachlandeck = {pkgs, ...}: {
-      home.stateVersion = "26.05";
-
+    home-manager.users.lachlandeck = {pkgs, ...}: let
+      sys = pkgs.stdenv.hostPlatform.system;
+    in {
       imports = [
         self.homeManagerModules.ghostty
       ];
+      home.stateVersion = "26.05";
 
       programs.ghostty = {
         enable = true;
-        commandPackage = pkgs.zellij; # Auto-launches Zellij declaratively!
       };
+
+      home.packages = [
+        self.packages.${sys}.zellij
+      ];
     };
     # -------- LINUX VM ON MAC -------------------------------
     nix.linux-builder.enable = true;

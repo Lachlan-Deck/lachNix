@@ -80,6 +80,7 @@
             let system_paths = [
               ("~/.nix-profile/bin" | path expand)
               "/nix/var/nix/profiles/default/bin"
+              "/run/current-system/sw/bin"
               "/opt/homebrew/bin"
               "/opt/homebrew/sbin"
               "/usr/local/bin"

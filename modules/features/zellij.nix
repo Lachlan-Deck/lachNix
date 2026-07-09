@@ -18,10 +18,18 @@
         type = lib.types.nullOr lib.types.package;
         default = null;
         example = pkgs.nushell;
-        description = "The exact wrapped shell package binary that Zellij should execute as its default_shell.";
+        description = ''
+          The exact wrapped shell package binary that Zellij should execute as its
+          default_shell.
+        '';
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        readOnly = true;
+        description = "The wrapped Zellij package produced by this module.";
       };
     };
-
     config.packages.zellij = let
       basePackage = pkgs.zellij;
 
@@ -71,7 +79,6 @@
         paths = [basePackage];
         nativeBuildInputs = [pkgs.makeWrapper];
 
-        # ADDED THIS: Makes configFile accessible externally via config.packages.zellij.configFile
         passthru = {
           inherit configFile;
         };
