@@ -44,6 +44,7 @@
         font-size = 12;
 
         shell-integration = "detect";
+        confirm-close-surface = false;
 
         cursor-style = "block";
         macos-option-as-alt = true;
