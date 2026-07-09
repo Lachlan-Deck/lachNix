@@ -19,8 +19,10 @@
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
+          docker
+          colima
           uv
-          python311 # Recommended: explicitly use 3.11 or 3.12
+          python312
         ];
 
         shellHook = ''
@@ -29,26 +31,21 @@
           echo " 📂 Working Dir: $PWD"
           echo "========================================================="
 
-          # 1. Ensure UV looks at your current project root, not the nix-store path
+          # 1. Force UV to use Nix's Python interpreter for creating envs
+          export UV_PYTHON="${pkgs.python312}/bin/python3"
           export UV_PROJECT_ROOT="$PWD"
-
-          # 2. Tell Playwright where to find browsers if you install them via uv
           export PLAYWRIGHT_BROWSERS_PATH="$PWD/.cache/ms-playwright"
 
-          # 3. Handle local .venv in your PROJECT root
-          if [ ! -d ".venv" ]; then
-            echo "▶️ Creating local .venv in $PWD..."
-            uv venv
-          fi
-
-          # 4. Sync using the local pyproject.toml
+          # 2. Sync using the local pyproject.toml
+          # (uv sync will handle creating/updating the .venv in $PWD automatically)
           if [ -f "pyproject.toml" ]; then
             echo "▶️ Syncing dependencies..."
-            uv pip install -e .
+            uv sync
           else
             echo "⚠️ Warning: No pyproject.toml found in $PWD"
           fi
 
+          # 3. Activate the freshly synced local venv
           source .venv/bin/activate
           echo "✅ Dev environment ready."
           echo "========================================================="

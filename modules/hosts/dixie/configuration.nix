@@ -1,6 +1,6 @@
 # parts/hosts/dixie/configuration.nix
 {...}: {
-  flake.darwinModules.dixie-base = {
+  flake.darwinModules.dixie-config = {
     pkgs,
     self,
     ...

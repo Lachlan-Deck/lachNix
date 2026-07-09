@@ -14,7 +14,7 @@
     system = "aarch64-darwin";
     specialArgs = {inherit inputs self;};
     modules = [
-      self.darwinModules.dixie-base
+      self.darwinModules.dixie-config
       self.darwinModules.homebrew-wrapper
     ];
   };
