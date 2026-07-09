@@ -1,4 +1,4 @@
-# parts/zellij.nix
+# modules/features/zellij.nix
 {
   inputs,
   lib,
@@ -59,30 +59,27 @@
             bind "Alt a" { GoToPreviousTab; }
             bind "Alt g" { GoToNextTab; }
 
-            bind "super T" { NewTab; }
+            bind "super t" { NewTab; }
           }
         }
       '';
 
-      configFile = pkgs.writeText "zellij-config.kdl" zellijConfigText;
+      configFile = pkgs.writeText "config.kdl" zellijConfigText;
     in
       pkgs.symlinkJoin {
         name = "zellij-wrapped";
         paths = [basePackage];
         nativeBuildInputs = [pkgs.makeWrapper];
 
+        # ADDED THIS: Makes configFile accessible externally via config.packages.zellij.configFile
+        passthru = {
+          inherit configFile;
+        };
+
         postBuild = ''
           wrapProgram $out/bin/zellij \
-            --prefix PATH : ${lib.makeBinPath (lib.optional (cfg.defaultShellPackage != null) cfg.defaultShellPackage)}
-
-          mkdir -p $out/activate
-          cat > $out/activate/zellij-links << 'EOF'
-          #!/bin/sh
-          TARGET_DIR="$HOME/.config/zellij"
-          mkdir -p "$TARGET_DIR"
-          ln -sfn "${configFile}" "$TARGET_DIR/config.kdl"
-          EOF
-          chmod +x $out/activate/zellij-links
+            --prefix PATH : ${lib.makeBinPath (lib.optional (cfg.defaultShellPackage != null) cfg.defaultShellPackage)} \
+            --set ZELLIJ_CONFIG_FILE "${configFile}"
         '';
       };
   };

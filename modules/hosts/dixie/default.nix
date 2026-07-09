@@ -16,6 +16,7 @@
     modules = [
       self.darwinModules.dixie-config
       self.darwinModules.homebrew-wrapper
+      inputs.home-manager.darwinModules.home-manager
     ];
   };
 }

@@ -138,7 +138,7 @@
               command = "alejandra";
               args = ["-"];
             };
-            auto-format = true; # Explicit true value applied cleanly at root level
+            auto-format = true;
           })
       ]
       ++ lib.optionals cfg.lang.python [
@@ -206,10 +206,8 @@
       inherit pkgs;
       imports = [
         ({...}: {
-          # 1. Point directly to our config.toml
           flags."--config" = "${helixConfigToml}";
 
-          # 2. Build a mock config directory and force Helix to look there using XDG_CONFIG_HOME
           env.XDG_CONFIG_HOME = pkgs.linkFarm "helix-config-dir" [
             {
               name = "helix/languages.toml";
@@ -217,7 +215,6 @@
             }
           ];
 
-          # 3. Expose our runtime packages into the isolated PATH wrapper
           prefixVar = [
             {
               name = "PATH-wrapper";
