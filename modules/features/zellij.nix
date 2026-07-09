@@ -1,16 +1,22 @@
 # parts/zellij.nix
-{ inputs, lib, ... }: {
-
-  perSystem = { pkgs, config, ... }: let
+{
+  inputs,
+  lib,
+  ...
+}: {
+  perSystem = {
+    pkgs,
+    config,
+    ...
+  }: let
     cfg = config.programs.zellij;
   in {
-
     options.programs.zellij = {
       enable = lib.mkEnableOption "Custom wrapped Zellij workspace manager";
 
       defaultShellPackage = lib.mkOption {
         type = lib.types.nullOr lib.types.package;
-        default = null; 
+        default = null;
         example = pkgs.nushell;
         description = "The exact wrapped shell package binary that Zellij should execute as its default_shell.";
       };
@@ -59,24 +65,25 @@
       '';
 
       configFile = pkgs.writeText "zellij-config.kdl" zellijConfigText;
-    in pkgs.symlinkJoin {
-      name = "zellij-wrapped";
-      paths = [ basePackage ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
+    in
+      pkgs.symlinkJoin {
+        name = "zellij-wrapped";
+        paths = [basePackage];
+        nativeBuildInputs = [pkgs.makeWrapper];
 
-      postBuild = ''
-        wrapProgram $out/bin/zellij \
-          --prefix PATH : ${lib.makeBinPath (lib.optional (cfg.defaultShellPackage != null) cfg.defaultShellPackage)}
-        
-        mkdir -p $out/activate
-        cat > $out/activate/zellij-links << 'EOF'
-        #!/bin/sh
-        TARGET_DIR="$HOME/.config/zellij"
-        mkdir -p "$TARGET_DIR"
-        ln -sfn "${configFile}" "$TARGET_DIR/config.kdl"
-        EOF
-        chmod +x $out/activate/zellij-links
-      '';
-    };
+        postBuild = ''
+          wrapProgram $out/bin/zellij \
+            --prefix PATH : ${lib.makeBinPath (lib.optional (cfg.defaultShellPackage != null) cfg.defaultShellPackage)}
+
+          mkdir -p $out/activate
+          cat > $out/activate/zellij-links << 'EOF'
+          #!/bin/sh
+          TARGET_DIR="$HOME/.config/zellij"
+          mkdir -p "$TARGET_DIR"
+          ln -sfn "${configFile}" "$TARGET_DIR/config.kdl"
+          EOF
+          chmod +x $out/activate/zellij-links
+        '';
+      };
   };
 }

@@ -23,7 +23,7 @@
       home = "/Users/lachlandeck";
       shell = pkgs.zsh;
     };
-   
+
     security.pam.services.sudo_local.touchIdAuth = true;
     environment.variables.EDITOR = "hx";
 
