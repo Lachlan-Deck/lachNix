@@ -1,7 +1,7 @@
 {
   description = "Standalone Python dev shell for algo/analysis assignment";
 
-  # nix develop ~/lachNix/user-modules/shells/python3
+  # nix develop ~/lachNix/shells/python3
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
