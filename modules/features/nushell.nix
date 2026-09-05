@@ -66,18 +66,8 @@
               }
             }
 
-            # Safely check type using describe
-            let current_paths = if "PATH" in $env {
-              if ($env.PATH | describe | str starts-with "string") {
-                $env.PATH | split row (char env_sep)
-              } else {
-                $env.PATH
-              }
-            } else {
-              []
-            }
-
-            let system_paths = [
+            # Strictly defined path (ignoring inherited host environment)
+            $env.PATH = [
               ("~/.nix-profile/bin" | path expand)
               "/nix/var/nix/profiles/default/bin"
               "/run/current-system/sw/bin"
@@ -89,8 +79,6 @@
               "/usr/sbin"
               "/sbin"
             ]
-
-            $env.PATH = ($current_paths | append $system_paths | uniq)
           '';
 
           prefixVar = [

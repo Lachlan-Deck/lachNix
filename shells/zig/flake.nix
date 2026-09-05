@@ -9,12 +9,12 @@
     nixpkgs,
     ...
   }: let
-    system = "aarch-64-darwin";
+    system = "aarch64-darwin";
     pkgs = import nixpkgs {inherit system;};
   in {
-    devshells.${system}.default = pkgs.mkShell {
+    devShells.${system}.default = pkgs.mkShell {
       packages = [
-        pkgs.zig_0_16
+        pkgs.zig
       ];
     };
   };

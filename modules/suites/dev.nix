@@ -1,52 +1,77 @@
 # modules/suites/dev.nix
-{self, ...}: {
+{
+  self,
+  lib,
+  ...
+}: {
   perSystem = {
     pkgs,
     system,
     config,
     ...
-  }: let
-    appsSuite = [
-      config.packages.zellij
-      config.packages.yazi
-      config.packages.helix
-      config.packages.nushell
-    ];
-  in {
+  }: {
     config = {
       programs.helix = {
-        lang.nix = true;
-        lsp.nixd = true;
-        formatter.alejandra = true;
-
-        lang.html = false;
-        lang.css = false;
-        lang.json = false;
-        lang.typescript = false;
-        lang.python = false;
+        lang = {
+          nix = true;
+          zig = true;
+          html = false;
+          css = false;
+          json = false;
+          typescript = false;
+          python = false;
+        };
+        lsp = {
+          nixd = true;
+          zls = true;
+        };
+        formatter = {
+          alejandra = true;
+          zig = true;
+        };
       };
-
       programs.nushell = {
         enable = true;
         editorCommand = "hx";
-        extraPackages = [config.packages.helix];
+        # extraPackages = [config.packages.helix];
       };
 
       programs.yazi = {
         enable = true;
-        extraPackages = [config.packages.helix];
+        # extraPackages = [config.packages.helix];
       };
 
       programs.zellij = {
         enable = true;
-        defaultShellPackage = config.packages.nushell;
+        # defaultShellPackage = config.packages.nushell;
       };
+      packages.dev = pkgs.symlinkJoin {
+        name = "dev-suite";
+        paths =
+          [
+            config.packages.yazi
+            config.packages.helix
+            config.packages.nushell
+          ]
+          # zellij -------------------------
+          ++ (
+            if config.programs.zellij.enable
+            then [config.packages.zellij]
+            else []
+          );
+        # --------------------------------
 
-      packages = {
-        dev = pkgs.symlinkJoin {
-          name = "dev-suite";
-          paths = appsSuite;
-        };
+        # yazi ---------------------------
+
+        # --------------------------------
+
+        # nushell ------------------------
+
+        # --------------------------------
+
+        # helix --------------------------
+
+        # --------------------------------
       };
     };
   };
