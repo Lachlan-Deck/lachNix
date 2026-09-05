@@ -12,16 +12,21 @@
   }: let
     unstable-pkgs = import inputs.unstable-nixpkgs {inherit system;};
     cfg = config.programs.helix;
+    helixConfigToml = pkgs.writeText "config.toml" ''
+      # This is a live-reloading test comment five, electric boogaloo!
+      theme = "gruvbox"
 
-    helixConfigToml = pkgs.writers.writeTOML "config.toml" {
-      theme = "gruvbox";
-      editor = {
-        lsp.display-messages = true;
-      };
-    };
-
+      [editor.lsp]
+      display-messages = true
+    '';
     languageServers =
       {}
+      // lib.optionalAttrs cfg.lsp.zls {
+        zls = {
+          command = "zls";
+          args = [];
+        };
+      }
       // lib.optionalAttrs cfg.lsp.superhtml {
         superhtml-lsp = {
           command = "superhtml";
@@ -67,6 +72,14 @@
 
     languagesList =
       []
+      ++ lib.optionals cfg.lang.zig [
+        {
+          name = "zig";
+          scope = "source.zig";
+          file-types = ["zig"];
+          language-servers = lib.optional cfg.lsp.zls "zls";
+        }
+      ]
       ++ lib.optionals cfg.lang.html [
         ({
             name = "html";
@@ -159,6 +172,9 @@
 
     runtimePackages =
       []
+      ++ lib.optionals cfg.formatter.zig [unstable-pkgs.zig]
+      ++ lib.optionals cfg.lsp.zls [unstable-pkgs.zls]
+      ++ lib.optionals cfg.lang.zig [unstable-pkgs.zig]
       ++ lib.optionals cfg.lsp.superhtml [unstable-pkgs.superhtml]
       ++ lib.optionals cfg.formatter.superhtml [unstable-pkgs.superhtml]
       ++ lib.optionals cfg.lsp.vscode-css [unstable-pkgs.vscode-langservers-extracted]
@@ -178,6 +194,7 @@
   in {
     options.programs.helix = {
       lang = {
+        zig = lib.mkEnableOption "Zig language definitions" // {default = false;};
         html = lib.mkEnableOption "HTML language definitions" // {default = false;};
         css = lib.mkEnableOption "CSS language definitions" // {default = false;};
         json = lib.mkEnableOption "JSON language definitions" // {default = false;};
@@ -186,6 +203,7 @@
         python = lib.mkEnableOption "Python language definitions" // {default = false;};
       };
       lsp = {
+        zls = lib.mkEnableOption "Zig LSP" // {default = false;};
         superhtml = lib.mkEnableOption "superhtml LSP" // {default = false;};
         vscode-css = lib.mkEnableOption "VSCode CSS LSP" // {default = false;};
         vscode-json = lib.mkEnableOption "VSCode JSON LSP" // {default = false;};
@@ -199,6 +217,7 @@
         prettier = lib.mkEnableOption "prettier formatting" // {default = false;};
         alejandra = lib.mkEnableOption "alejandra formatting" // {default = false;};
         ruff = lib.mkEnableOption "ruff formatting" // {default = false;};
+        zig = lib.mkEnableOption "zig fmt formatting" // {default = false;};
       };
     };
 
@@ -206,18 +225,19 @@
       inherit pkgs;
       imports = [
         ({...}: {
-          flags."--config" = "${helixConfigToml}";
-
           env.XDG_CONFIG_HOME = pkgs.linkFarm "helix-config-dir" [
+            {
+              name = "helix/config.toml";
+              path = helixConfigToml;
+            }
             {
               name = "helix/languages.toml";
               path = helixLanguagesToml;
             }
           ];
-
           prefixVar = [
             {
-              name = "PATH-wrapper";
+              name = "PATH";
               data = ["PATH" ":" (lib.makeBinPath (lib.unique runtimePackages))];
             }
           ];
