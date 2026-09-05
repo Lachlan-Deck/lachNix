@@ -39,6 +39,7 @@
         "raycast"
         "slack"
         "steam"
+        "adobe-acrobat-reader"
       ];
     };
   };
