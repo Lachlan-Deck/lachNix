@@ -1,4 +1,4 @@
-# modules/suites/dev.nix
+# modules/suites/elixir_dev.nix
 {...}: {
   perSystem = {
     pkgs,
@@ -9,32 +9,32 @@
       programs.helix = {
         lang = {
           nix = true;
-          zig = true;
+          zig = false;
           html = false;
           css = false;
           json = false;
           typescript = false;
           python = false;
-          elixir = false;
+          elixir = true;
         };
         lsp = {
           nixd = true;
-          zls = true;
+          zls = false;
           superhtml = false;
           vscode-css = false;
           vscode-json = false;
           vscode-eslint = false;
           pylsp = false;
           pyright = false;
-          expert = false;
+          expert = true;
         };
         formatter = {
           alejandra = true;
-          zig = true;
+          zig = false;
           superhtml = false;
           prettier = false;
           ruff = false;
-          elixir = false;
+          elixir = true;
         };
       };
       programs.nushell = {

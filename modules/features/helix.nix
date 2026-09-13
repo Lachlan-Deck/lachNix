@@ -13,7 +13,6 @@
     unstable-pkgs = import inputs.unstable-nixpkgs {inherit system;};
     cfg = config.programs.helix;
     helixConfigToml = pkgs.writeText "config.toml" ''
-      # This is a live-reloading test comment five, electric boogaloo!
       theme = "gruvbox"
 
       [editor.lsp]
@@ -66,6 +65,12 @@
       // lib.optionalAttrs cfg.lsp.pyright {
         pyright = {
           command = "pyright-langserver";
+          args = ["--stdio"];
+        };
+      }
+      // lib.optionalAttrs cfg.lsp.expert {
+        expert = {
+          command = "expert";
           args = ["--stdio"];
         };
       };
@@ -154,6 +159,20 @@
             auto-format = true;
           })
       ]
+      ++ lib.optionals cfg.lang.elixir [
+        {
+          name = "elixir";
+          scope = "source.elixir";
+          file-types = ["ex" "exs"];
+          language-servers = lib.optional cfg.lsp.expert "expert";
+        }
+        {
+          name = "heex";
+          scope = "text.html.elixir";
+          file-types = ["heex"];
+          language-servers = lib.optional cfg.lsp.expert "expert";
+        }
+      ]
       ++ lib.optionals cfg.lang.python [
         ({
             name = "python";
@@ -172,20 +191,28 @@
 
     runtimePackages =
       []
+      # zig:
       ++ lib.optionals cfg.formatter.zig [unstable-pkgs.zig]
       ++ lib.optionals cfg.lsp.zls [unstable-pkgs.zls]
       ++ lib.optionals cfg.lang.zig [unstable-pkgs.zig]
+      # html/css
       ++ lib.optionals cfg.lsp.superhtml [unstable-pkgs.superhtml]
       ++ lib.optionals cfg.formatter.superhtml [unstable-pkgs.superhtml]
       ++ lib.optionals cfg.lsp.vscode-css [unstable-pkgs.vscode-langservers-extracted]
+      # json
       ++ lib.optionals cfg.lsp.vscode-json [unstable-pkgs.vscode-langservers-extracted]
+      # typescript/js
       ++ lib.optionals cfg.lsp.vscode-eslint [unstable-pkgs.vscode-langservers-extracted]
       ++ lib.optionals cfg.formatter.prettier [pkgs.prettier]
+      # nix
       ++ lib.optionals cfg.lsp.nixd [pkgs.nixd]
       ++ lib.optionals cfg.formatter.alejandra [pkgs.alejandra]
+      # python
       ++ lib.optionals cfg.lsp.pylsp [pkgs.python312Packages.python-lsp-server]
       ++ lib.optionals cfg.lsp.pyright [pkgs.pyright]
-      ++ lib.optionals cfg.formatter.ruff [pkgs.python312Packages.ruff];
+      ++ lib.optionals cfg.formatter.ruff [pkgs.python312Packages.ruff]
+      # elixir
+      ++ lib.optionals cfg.lsp.expert [pkgs.beamMinimal29Packages.expert];
 
     helixLanguagesToml = pkgs.writers.writeTOML "languages.toml" {
       language-server = languageServers;
@@ -201,6 +228,7 @@
         typescript = lib.mkEnableOption "TS/TSX language definitions" // {default = false;};
         nix = lib.mkEnableOption "Nix language definitions" // {default = false;};
         python = lib.mkEnableOption "Python language definitions" // {default = false;};
+        elixir = lib.mkEnableOption "elixir language definitions" // {default = false;};
       };
       lsp = {
         zls = lib.mkEnableOption "Zig LSP" // {default = false;};
@@ -211,6 +239,7 @@
         nixd = lib.mkEnableOption "nixd LSP" // {default = false;};
         pylsp = lib.mkEnableOption "pylsp" // {default = false;};
         pyright = lib.mkEnableOption "pyright LSP" // {default = false;};
+        expert = lib.mkEnableOption "expert LSP for elixir" // {default = false;};
       };
       formatter = {
         superhtml = lib.mkEnableOption "superhtml formatting" // {default = false;};
@@ -218,6 +247,7 @@
         alejandra = lib.mkEnableOption "alejandra formatting" // {default = false;};
         ruff = lib.mkEnableOption "ruff formatting" // {default = false;};
         zig = lib.mkEnableOption "zig fmt formatting" // {default = false;};
+        elixir = lib.mkEnableOption "elixir fmt formatting" // {default = false;};
       };
     };
 
