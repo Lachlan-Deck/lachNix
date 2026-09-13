@@ -15,7 +15,7 @@
           json = false;
           typescript = false;
           python = false;
-          elixir = false;
+          elixir = true;
         };
         lsp = {
           nixd = true;
@@ -26,7 +26,7 @@
           vscode-eslint = false;
           pylsp = false;
           pyright = false;
-          expert = false;
+          expert = true;
         };
         formatter = {
           alejandra = true;
@@ -34,7 +34,7 @@
           superhtml = false;
           prettier = false;
           ruff = false;
-          elixir = false;
+          elixir = true;
         };
       };
       programs.nushell = {
